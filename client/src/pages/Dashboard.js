@@ -27,6 +27,8 @@ export default function Dashboard() {
   const [company, setCopany] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 
+  const [loading, setLoading] = useState(true);
+
   let { id } = useParams();
 
   const toggle = () => setModalOpen(!modalOpen);
@@ -87,6 +89,7 @@ export default function Dashboard() {
 
       setData(itemData);
       setCopany(companyData);
+      setLoading(false)
     }
 
     fetchApi();
@@ -99,7 +102,8 @@ export default function Dashboard() {
 
   return (
     <>
-      {data ? (
+      {loading ? <h3>Loading..</h3> : ''}
+      {data && !loading ? (
         <Container style={{ marginTop: "8rem" }}>
           <SearchInventory
             id={id}
@@ -126,7 +130,18 @@ export default function Dashboard() {
             </ModalFooter>
           </Modal>
 
-          {}
+          {itemsLowStock && itemsLowStock.length ? (
+            <Row>
+              <div className="card mb-3">
+                <div className="card-body">
+                  <h5 className="card-title">LOW STOCK</h5>
+                  <Row>{itemsLowStock}</Row>
+                </div>
+              </div>
+            </Row>
+          ) : (
+            ""
+          )}
 
           {items && items.length ? (
             <Row>
@@ -141,9 +156,8 @@ export default function Dashboard() {
             ""
           )}
         </Container>
-      ) : (
-        <h3>You do not have access to this company</h3>
-      )}
+      ) : ''}
+      {!data && !loading ? <h1>You do not have access to this inventory</h1> : ''}
     </>
   );
 }

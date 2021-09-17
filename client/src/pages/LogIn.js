@@ -28,7 +28,7 @@ export default function LogIn({ toggleUpdate }) {
       username,
       password,
     };
-    toggleUpdate();
+    
     await axios.post("/login", data);
     setRedirect(true);
     window.location.reload(false);

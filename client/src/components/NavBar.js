@@ -104,16 +104,16 @@ const NavBar = ({ update }) => {
 
             {dashboardLinks && dashboardLinks.length ? (
               <li className="nav-item dropdown">
-                <a
+                <span
                   className="nav-link dropdown-toggle"
-                  href="#"
+                
                   id="navbarDropdownMenuLink"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Inventory Lists
-                </a>
+                </span>
                 <ul
                   className="dropdown-menu"
                   aria-labelledby="navbarDropdownMenuLink"

@@ -12,26 +12,27 @@ import HomeLoggedOut from "./HomeLoggedOut";
 export default function Home({ update, toggleUpdate }) {
   const [userCompanies, setUserCompanies] = useState(null);
 
-  const { user, loading } = useContext(UserProvider.context);
+  const { user } = useContext(UserProvider.context);
 
-  const [loadToggle, setLoadToggle] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async function fetchData() {
       const res = await axios.get("/nav");
+      setLoading(false)
       const { companies } = res.data;
       if (companies) {
         setUserCompanies([...companies]);
+        setLoading(false)
       }
     })();
   }, [update]);
 
-  useEffect(() => {
-    console.log(user);
-  }, [loading]);
 
   return (
-    <Container>
+    <>
+    {loading ? <h3>Loading..</h3> : 
+      <Container>
       {user ? (
         <HomeLoggedIn
           companies={userCompanies}
@@ -42,5 +43,8 @@ export default function Home({ update, toggleUpdate }) {
         <HomeLoggedOut />
       )}
     </Container>
+    }
+    
+    </>
   );
 }

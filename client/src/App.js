@@ -9,6 +9,7 @@ import LogIn from "./pages/LogIn";
 import NavBar from "./components/NavBar";
 import { useState } from "react";
 import { UserProvider } from "./context/UserContext";
+import NotFound from "./pages/404";
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -21,6 +22,7 @@ import { UserProvider } from "./context/UserContext";
 
 function App() {
   const [update, setUpdate] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false)
 
   function toggleUpdate() {
     console.log("toggleupdate");
@@ -46,6 +48,9 @@ function App() {
               </Route>
               <Route path="/dashboard/:id">
                 <Dashboard />
+              </Route>
+              <Route>
+                <NotFound/>
               </Route>
             </Switch>
           </div>
