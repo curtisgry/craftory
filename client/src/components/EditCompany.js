@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { UserListProvider } from "../context/UserListsContext";
-
+import { baseUrl } from "../utils/baseUrl";
 export default function EditCompany({ data }) {
   const [name, setName] = useState(data.name);
   const [location, setLocation] = useState(data.location);
@@ -28,13 +28,13 @@ export default function EditCompany({ data }) {
     };
 
     setLoadingList(true)
-    await axios.put(`/company/${data._id}`, update);
+    await axios.put(`${baseUrl}/company/${data._id}`, update);
   }
 
   async function handleDelete() {
 
     setLoadingList(true)
-    await axios.delete(`/company/${data._id}`);
+    await axios.delete(`${baseUrl}/company/${data._id}`);
   }
 
   return (

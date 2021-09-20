@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-
+import { baseUrl } from "../utils/baseUrl";
 export default function AddItem({
   id,
   updateState,
@@ -41,7 +41,7 @@ export default function AddItem({
     setLink("");
 
     updateState();
-    await axios.post("/items", data);
+    await axios.post(`${baseUrl}/items`, data);
 
     
   }

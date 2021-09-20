@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import axios from "axios";
 import { UserProvider } from "../context/UserContext";
+import { baseUrl } from "../utils/baseUrl";
 
 export default function About() {
   const [email, setEmail] = useState("");
@@ -30,7 +31,7 @@ export default function About() {
       password,
     };
     
-    await axios.post("/register", data);
+    await axios.post(`${baseUrl}/register`, data);
     setLoading(true)
     history.push('/')
  

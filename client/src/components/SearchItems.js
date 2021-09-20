@@ -5,6 +5,8 @@ import axios from "axios";
 
 import { Form, FormGroup, Input } from "reactstrap";
 
+import { baseUrl } from "../utils/baseUrl";
+
 export default function SearchInventory({ id, updateData, updateState }) {
   const [search, setSearch] = useState("");
 
@@ -14,7 +16,7 @@ export default function SearchInventory({ id, updateData, updateState }) {
       const data = {
         search: search.trim(),
       };
-      const res = await axios.post(`/search/${id}`, data);
+      const res = await axios.post(`${baseUrl}/search/${id}`, data);
       updateData(res.data);
     } else {
       await updateState();

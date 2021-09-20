@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import axios from "axios";
 import { UserProvider } from "../context/UserContext";
+import { baseUrl } from "../utils/baseUrl";
 
 export default function LogIn() {
   const [username, setUsername] = useState("");
@@ -25,7 +26,7 @@ export default function LogIn() {
       password,
     };
     
-    await axios.post("/login", data);
+    await axios.post(`${baseUrl}/login`, data);
     setLoading(true)
     history.push('/')
 

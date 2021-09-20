@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { baseUrl } from "../utils/baseUrl";
 const context = createContext(null);
 
 
@@ -9,7 +10,7 @@ const useGetUser = () => {
   useEffect(() => {
       
     axios
-      .get('/user', { withCredentials: true })
+      .get(`${baseUrl}/user`, { withCredentials: true })
       .then((res) => {
           console.log(res.data)
         setLoggedInUser(res.data);

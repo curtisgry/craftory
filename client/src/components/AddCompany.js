@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { UserListProvider } from "../context/UserListsContext";
-
+import { baseUrl } from "../utils/baseUrl";
 export default function AddCompany({ toggle, toggleUpdate }) {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
@@ -31,7 +31,7 @@ export default function AddCompany({ toggle, toggleUpdate }) {
       setLocation("");
       setLoadingList(true)
       
-    axios.post("/company", data)
+    axios.post(`${baseUrl}/company`, data)
     .then(res => {
       console.log('insubmit',loadingList)
     }).catch(e => console.log(e))

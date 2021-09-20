@@ -18,6 +18,7 @@ import {
 } from "reactstrap";
 import SearchInventory from "../components/SearchItems";
 import { useParams } from "react-router";
+import { baseUrl } from "../utils/baseUrl";
 
 export default function Dashboard() {
   const history = useHistory();
@@ -83,7 +84,7 @@ export default function Dashboard() {
   }
   useEffect(() => {
     async function fetchApi() {
-      const res = await axios.get(`/dashboard/${id}`, { params: id });
+      const res = await axios.get(`${baseUrl}/dashboard/${id}`, { params: id });
       const itemData = res.data.filtered;
       const companyData = res.data.company;
 

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { UserProvider } from "../context/UserContext";
 import { UserListProvider } from "../context/UserListsContext";
-
+import { baseUrl } from "../utils/baseUrl";
 const NavBar = ({ update }) => {
   // const [isOpen, setIsOpen] = useState(false);
   const { user } = useContext(UserProvider.context);
@@ -30,7 +30,7 @@ const NavBar = ({ update }) => {
   }
 
   function logout() {
-    axios.get("/logout");
+    axios.get(`${baseUrl}/logout`;
   }
 
   function renderCondLinks() {

@@ -14,6 +14,8 @@ import {
   CardText,
 } from "reactstrap";
 
+import { baseUrl } from "../utils/baseUrl";
+
 export default function DashboardItem({
   id,
   name,
@@ -27,7 +29,7 @@ export default function DashboardItem({
   const toggle = () => setIsOpen(!isOpen);
 
   function handleClick() {
-    axios.delete(`/items/${id}`);
+    axios.delete(`${baseUrl}/items/${id}`);
     updateState();
   }
 

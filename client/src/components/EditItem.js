@@ -3,6 +3,8 @@ import { useState } from "react";
 
 import axios from "axios";
 
+import { baseUrl } from "../utils/baseUrl";
+
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 export default function EditItem({ updateState, data }) {
@@ -28,7 +30,7 @@ export default function EditItem({ updateState, data }) {
       link,
     };
     updateState();
-    await axios.put(`/items/${data.id}`, update);
+    await axios.put(`${baseUrl}/items/${data.id}`, update);
   }
 
   return (

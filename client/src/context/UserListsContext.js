@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { baseUrl } from "../utils/baseUrl";
 const context = createContext(null);
 
 const useGetLists = () => {
@@ -8,7 +9,7 @@ const useGetLists = () => {
   useEffect(() => {
     console.log('THE LIST,',list)
       if(loadingList){ 
-    axios.get("/userdata")
+    axios.get(`${baseUrl}/userdata`)
      .then(res => {
       const { companies } = res.data;
       if (companies) {
