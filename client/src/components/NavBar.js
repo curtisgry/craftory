@@ -4,37 +4,41 @@ import axios from "axios";
 import { UserProvider } from "../context/UserContext";
 import { UserListProvider } from "../context/UserListsContext";
 import { baseUrl } from "../utils/baseUrl";
+import { useHistory } from "react-router";
 const NavBar = ({ update }) => {
   // const [isOpen, setIsOpen] = useState(false);
-  const { user } = useContext(UserProvider.context);
-  const {list} = useContext(UserListProvider.context)
+  const { user, setLoading } = useContext(UserProvider.context);
+  const { list } = useContext(UserListProvider.context);
+  const history = useHistory();
 
   // const toggle = () => setIsOpen(!isOpen);
 
   function makeLinks(arr) {
     if (arr) {
-      if(arr.length){
-      const links = arr.map((item) => {
-        return (
-          <li key={item._id} className="dropdown-item">
-            <Link className="nav-link" to={`/dashboard/${item._id}`}>
-              {item.name}
-            </Link>
-          </li>
-        );
-      });
+      if (arr.length) {
+        const links = arr.map((item) => {
+          return (
+            <li key={item._id} className="dropdown-item">
+              <Link className="nav-link" to={`/dashboard/${item._id}`}>
+                {item.name}
+              </Link>
+            </li>
+          );
+        });
 
-      return links;
+        return links;
+      }
     }
-  }
   }
 
   function logout() {
-    axios.get(`${baseUrl}/logout`);
+    axios.get(`${baseUrl}/logout`).then((res) => {
+      setLoading(true);
+      history.push("/");
+    });
   }
 
   function renderCondLinks() {
-
     if (!user) {
       return (
         <>
@@ -107,7 +111,6 @@ const NavBar = ({ update }) => {
               <li className="nav-item dropdown">
                 <span
                   className="nav-link dropdown-toggle"
-                
                   id="navbarDropdownMenuLink"
                   role="button"
                   data-bs-toggle="dropdown"

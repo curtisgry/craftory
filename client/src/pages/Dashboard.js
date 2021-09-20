@@ -84,13 +84,13 @@ export default function Dashboard() {
   }
   useEffect(() => {
     async function fetchApi() {
-      const res = await axios.get(`${baseUrl}/dashboard/${id}`, { params: id });
+      const res = await axios.get(`${baseUrl}/company/${id}`, { params: id });
       const itemData = res.data.filtered;
       const companyData = res.data.company;
 
       setData(itemData);
       setCopany(companyData);
-      setLoading(false)
+      setLoading(false);
     }
 
     fetchApi();
@@ -103,7 +103,7 @@ export default function Dashboard() {
 
   return (
     <>
-      {loading ? <h3>Loading..</h3> : ''}
+      {loading ? <h3>Loading..</h3> : ""}
       {data && !loading ? (
         <Container style={{ marginTop: "8rem" }}>
           <SearchInventory
@@ -157,8 +157,14 @@ export default function Dashboard() {
             ""
           )}
         </Container>
-      ) : ''}
-      {!data && !loading ? <h1>You do not have access to this inventory</h1> : ''}
+      ) : (
+        ""
+      )}
+      {!data && !loading ? (
+        <h1>You do not have access to this inventory</h1>
+      ) : (
+        ""
+      )}
     </>
   );
 }

@@ -3,23 +3,20 @@ import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
 const context = createContext(null);
 
-
 const useGetUser = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [success, setSuccess] = useState();
   useEffect(() => {
-      
     axios
       .get(`${baseUrl}/user`, { withCredentials: true })
       .then((res) => {
-          console.log(res.data)
         setLoggedInUser(res.data);
         setLoading(false);
       })
       .catch((e) => {
         setLoggedInUser(false);
       });
-   
   }, [loading]);
 
   return { loggedInUser, loading, setLoading };

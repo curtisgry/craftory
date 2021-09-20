@@ -25,38 +25,37 @@ function App() {
   const [update, setUpdate] = useState(false);
 
   function toggleUpdate() {
-    console.log("toggleupdate");
     setUpdate((last) => !last);
   }
 
   return (
     <UserProvider>
       <UserListProvider>
-      <div className="App">
-        <Router>
-          <div>
-            <NavBar update={update} toggleUpdate={toggleUpdate} />
+        <div className="App">
+          <Router>
+            <div>
+              <NavBar update={update} toggleUpdate={toggleUpdate} />
 
-            <Switch>
-              <Route exact path="/">
-                <Home update={update} toggleUpdate={toggleUpdate} />
-              </Route>
-              <Route path="/signup">
-                <SignUp />
-              </Route>
-              <Route path="/login">
-                <LogIn toggleUpdate={toggleUpdate} />
-              </Route>
-              <Route path="/dashboard/:id">
-                <Dashboard />
-              </Route>
-              <Route>
-                <NotFound/>
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-      </div>
+              <Switch>
+                <Route exact path="/">
+                  <Home update={update} toggleUpdate={toggleUpdate} />
+                </Route>
+                <Route path="/signup">
+                  <SignUp />
+                </Route>
+                <Route path="/login">
+                  <LogIn toggleUpdate={toggleUpdate} />
+                </Route>
+                <Route path="/dashboard/:id">
+                  <Dashboard />
+                </Route>
+                <Route>
+                  <NotFound />
+                </Route>
+              </Switch>
+            </div>
+          </Router>
+        </div>
       </UserListProvider>
     </UserProvider>
   );

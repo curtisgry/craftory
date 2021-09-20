@@ -9,8 +9,7 @@ export default function EditCompany({ data }) {
   const [name, setName] = useState(data.name);
   const [location, setLocation] = useState(data.location);
 
-
-  const {  setLoadingList } = useContext(UserListProvider.context)
+  const { setLoadingList } = useContext(UserListProvider.context);
 
   function handleName(e) {
     setName(e.target.value);
@@ -19,7 +18,6 @@ export default function EditCompany({ data }) {
     setLocation(e.target.value);
   }
 
-
   async function handleSubmit(e) {
     e.preventDefault();
     const update = {
@@ -27,13 +25,12 @@ export default function EditCompany({ data }) {
       location,
     };
 
-    setLoadingList(true)
+    setLoadingList(true);
     await axios.put(`${baseUrl}/company/${data._id}`, update);
   }
 
   async function handleDelete() {
-
-    setLoadingList(true)
+    setLoadingList(true);
     await axios.delete(`${baseUrl}/company/${data._id}`);
   }
 

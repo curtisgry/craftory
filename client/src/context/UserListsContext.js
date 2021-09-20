@@ -7,18 +7,16 @@ const useGetLists = () => {
   const [list, setList] = useState([]);
   const [loadingList, setLoadingList] = useState(true);
   useEffect(() => {
-    console.log('THE LIST,',list)
-      if(loadingList){ 
-    axios.get(`${baseUrl}/userdata`)
-     .then(res => {
-      const { companies } = res.data;
-      if (companies) {
-        setList([...companies]);
-      }
-      setLoadingList(false)
-     })
+    if (loadingList) {
+      axios.get(`${baseUrl}/userdata`).then((res) => {
+        const { companies } = res.data;
+        if (companies) {
+          setList([...companies]);
+        }
+        setLoadingList(false);
+      });
     }
-  }, [loadingList, setLoadingList])
+  }, [loadingList, setLoadingList]);
 
   return { list, loadingList, setLoadingList };
 };

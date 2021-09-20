@@ -7,7 +7,7 @@ import { baseUrl } from "../utils/baseUrl";
 export default function LogIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory()
+  const history = useHistory();
 
   const { setLoading } = useContext(UserProvider.context);
 
@@ -25,16 +25,15 @@ export default function LogIn() {
       username,
       password,
     };
-    
-    await axios.post(`${baseUrl}/login`, data);
-    setLoading(true)
-    history.push('/')
 
+    const res = await axios.post(`${baseUrl}/login`, data);
+    console.log(res);
+    setLoading(true);
+    history.push("/");
   }
 
   return (
     <div className="container col-xl-10 col-xxl-8 px-4 py-5">
-    
       <div className="row align-items-center g-lg-5 py-5">
         <div className="col-lg-7 text-center text-lg-start">
           <h1 className="display-4 fw-bold lh-1 mb-3">Sign In</h1>

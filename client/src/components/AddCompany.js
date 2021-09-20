@@ -7,7 +7,7 @@ import { baseUrl } from "../utils/baseUrl";
 export default function AddCompany({ toggle, toggleUpdate }) {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
-  const { loadingList, setLoadingList } = useContext(UserListProvider.context)
+  const { loadingList, setLoadingList } = useContext(UserListProvider.context);
 
   function handleName(e) {
     setName(e.target.value);
@@ -18,7 +18,6 @@ export default function AddCompany({ toggle, toggleUpdate }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('ran submit')
 
     const data = {
       name,
@@ -27,18 +26,14 @@ export default function AddCompany({ toggle, toggleUpdate }) {
     toggleUpdate();
     toggle();
 
-      setName("");
-      setLocation("");
-      setLoadingList(true)
-      
-    axios.post(`${baseUrl}/company`, data)
-    .then(res => {
-      console.log('insubmit',loadingList)
-    }).catch(e => console.log(e))
- 
-   
-    
-    
+    setName("");
+    setLocation("");
+    setLoadingList(true);
+
+    axios
+      .post(`${baseUrl}/company`, data)
+      .then((res) => {})
+      .catch((e) => console.log(e));
   }
 
   return (
@@ -66,11 +61,8 @@ export default function AddCompany({ toggle, toggleUpdate }) {
             placeholder="Enter location"
           />
         </FormGroup>
-        <Button disabled={name ? false : true}>
-        Submit
-      </Button>
+        <Button disabled={name ? false : true}>Submit</Button>
       </Form>
-     
     </div>
   );
 }

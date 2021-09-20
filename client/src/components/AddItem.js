@@ -3,10 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { baseUrl } from "../utils/baseUrl";
-export default function AddItem({
-  id,
-  updateState,
-}) {
+export default function AddItem({ id, updateState }) {
   const [name, setName] = useState("");
   const [qty, setQty] = useState(0);
   const [qtyLow, setQtyLow] = useState(0);
@@ -37,13 +34,11 @@ export default function AddItem({
 
     setName("");
     setQty(0);
-    setQtyLow(0)
+    setQtyLow(0);
     setLink("");
 
     updateState();
     await axios.post(`${baseUrl}/items`, data);
-
-    
   }
 
   return (
