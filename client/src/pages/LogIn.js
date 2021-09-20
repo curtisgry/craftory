@@ -1,24 +1,20 @@
-import React, { useState } from "react";
-import { Redirect } from "react-router";
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router";
 import axios from "axios";
-import { useGetUser } from "../context/UserContext";
+import { UserProvider } from "../context/UserContext";
 
-export default function LogIn({ toggleUpdate }) {
+export default function LogIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [redirect, setRedirect] = useState(false);
+  const history = useHistory()
+
+  const { setLoading } = useContext(UserProvider.context);
 
   function handleUsername(e) {
     setUsername(e.target.value);
   }
   function handlePassword(e) {
     setPassword(e.target.value);
-  }
-
-  function redirectAfterLogIn() {
-    if (redirect) {
-      return <Redirect to="/" />;
-    }
   }
 
   async function handleSubmit(e) {
@@ -30,13 +26,14 @@ export default function LogIn({ toggleUpdate }) {
     };
     
     await axios.post("/login", data);
-    setRedirect(true);
-    window.location.reload(false);
+    setLoading(true)
+    history.push('/')
+
   }
 
   return (
     <div className="container col-xl-10 col-xxl-8 px-4 py-5">
-      {redirectAfterLogIn()}
+    
       <div className="row align-items-center g-lg-5 py-5">
         <div className="col-lg-7 text-center text-lg-start">
           <h1 className="display-4 fw-bold lh-1 mb-3">Sign In</h1>

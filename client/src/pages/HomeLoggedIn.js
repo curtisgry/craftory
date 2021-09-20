@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
-import { useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+import { useState } from "react";
 
-import axios from "axios";
 
 import {
   Button,
@@ -13,31 +12,20 @@ import {
 } from "reactstrap";
 import AddCompany from "../components/AddCompany";
 import CompanyListItem from "../components/CompanyListItem";
-import { UserProvider, useGetUser } from "../context/UserContext";
+import { UserProvider } from "../context/UserContext";
+import { UserListProvider } from "../context/UserListsContext";
 
 export default function HomeLoggedIn({ companies, update, toggleUpdate }) {
-  // const [userCompanies, setUserCompanies] = useState(null);
-  const { user, loading } = useContext(UserProvider.context);
+
+  const { user } = useContext(UserProvider.context);
 
   const [modalOpen, setModalOpen] = useState(false);
 
+  const {list, loadingList} = useContext(UserListProvider.context)
+
   const toggle = () => setModalOpen(!modalOpen);
 
-  // useEffect(() => {
-  //   (async function fetchData() {
-  //     const res = await axios.get("/nav");
-  //     const { companies } = res.data;
-  //     if(companies){
-  //       setUserCompanies([...companies]);
-  //     }
 
-  //   })();
-
-  // }, []);
-
-  useEffect(() => {
-    console.log(user);
-  }, [loading]);
 
   const makeLinks = (arr) => {
     if (arr) {
@@ -54,7 +42,7 @@ export default function HomeLoggedIn({ companies, update, toggleUpdate }) {
     }
   };
 
-  const links = makeLinks(companies);
+  const links = makeLinks(list);
 
   return (
     <Container>

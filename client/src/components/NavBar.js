@@ -3,17 +3,20 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { UserProvider } from "../context/UserContext";
+import { UserListProvider } from "../context/UserListsContext";
 
 const NavBar = ({ update }) => {
   // const [isOpen, setIsOpen] = useState(false);
   const [userCompanies, setUserCompanies] = useState(null);
   const { user } = useContext(UserProvider.context);
+  const {list} = useContext(UserListProvider.context)
 
   // const toggle = () => setIsOpen(!isOpen);
 
   function makeLinks(arr) {
     if (arr) {
-      const links = userCompanies.map((item) => {
+      if(arr.length){
+      const links = arr.map((item) => {
         return (
           <li key={item._id} className="dropdown-item">
             <Link className="nav-link" to={`/dashboard/${item._id}`}>
@@ -26,13 +29,14 @@ const NavBar = ({ update }) => {
       return links;
     }
   }
+  }
 
   function logout() {
     axios.get("/logout");
   }
 
   function renderCondLinks() {
-    console.log(user);
+
     if (!user) {
       return (
         <>
@@ -61,18 +65,17 @@ const NavBar = ({ update }) => {
     }
   }
 
-  useEffect(() => {
-    (async function fetchData() {
-      const res = await axios.get("/nav");
-      const { companies } = res.data;
-      if (companies) {
-        setUserCompanies([...companies]);
-      }
-    })();
-    console.log("navlink useeffect");
-  }, [update]);
+  // useEffect(() => {
+  //   (async function fetchData() {
+  //     const res = await axios.get("/nav");
+  //     const { companies } = res.data;
+  //     if (companies) {
+  //       setUserCompanies([...companies]);
+  //     }
+  //   })();
+  // }, [user]);
 
-  const dashboardLinks = makeLinks(userCompanies);
+  const dashboardLinks = makeLinks(list);
   const conditionalLinks = renderCondLinks();
 
   return (

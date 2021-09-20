@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { UserListProvider } from "../context/UserListsContext";
 
 export default function AddCompany({ toggle, toggleUpdate }) {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
+  const { loadingList, setLoadingList } = useContext(UserListProvider.context)
 
   function handleName(e) {
     setName(e.target.value);
@@ -14,24 +16,34 @@ export default function AddCompany({ toggle, toggleUpdate }) {
     setLocation(e.target.value);
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
+    console.log('ran submit')
 
     const data = {
       name,
       location,
     };
-    setName("");
-    setLocation("");
-
     toggleUpdate();
     toggle();
-    await axios.post("/company", data);
+
+      setName("");
+      setLocation("");
+      setLoadingList(true)
+      
+    axios.post("/company", data)
+    .then(res => {
+      console.log('insubmit',loadingList)
+    }).catch(e => console.log(e))
+ 
+   
+    
+    
   }
 
   return (
     <div>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <FormGroup>
           <Label for="name">Company Name</Label>
           <Input
@@ -54,10 +66,11 @@ export default function AddCompany({ toggle, toggleUpdate }) {
             placeholder="Enter location"
           />
         </FormGroup>
-      </Form>
-      <Button onClick={handleSubmit} disabled={name ? false : true}>
+        <Button disabled={name ? false : true}>
         Submit
       </Button>
+      </Form>
+     
     </div>
   );
 }

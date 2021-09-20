@@ -32,6 +32,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(cors());
 
+app.use(function (req, res, next) {
+        res.header('Access-Control-Allow-Origin', 'https://localhost:3000'); // update to match the domain you will make the request from
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        next();
+});
+
 // Express session
 const sessionConfig = {
         secret: process.env.SECRET || 'secret',
@@ -76,7 +82,7 @@ app.get('/home', (req, res) => {
 app.get('/about', (req, res) => {
         res.send({ title: 'About page!' });
 });
-app.get('/nav', async (req, res) => {
+app.get('/userdata', ensureAuthenticated, async (req, res) => {
         if (req.user) {
                 const id = req.user._id;
                 const companies = await Company.find({ user: id });

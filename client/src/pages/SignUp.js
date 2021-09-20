@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Redirect } from "react-router";
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router";
 import axios from "axios";
+import { UserProvider } from "../context/UserContext";
 
 export default function About() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [redirect, setRedirect] = useState(false);
+  const { setLoading } = useContext(UserProvider.context);
+  const history = useHistory()
 
   function handleEmail(e) {
     setEmail(e.target.value);
@@ -18,11 +20,7 @@ export default function About() {
     setPassword(e.target.value);
   }
 
-  function redirectAfterReg() {
-    if (redirect) {
-      return <Redirect to="/" />;
-    }
-  }
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -31,14 +29,16 @@ export default function About() {
       username,
       password,
     };
-    setRedirect(true);
+    
     await axios.post("/register", data);
-    window.location.reload(false);
+    setLoading(true)
+    history.push('/')
+ 
   }
 
   return (
     <div className="container col-xl-10 col-xxl-8 px-4 py-5">
-      {redirectAfterReg()}
+  
       <div className="row align-items-center g-lg-5 py-5">
         <div className="col-lg-7 text-center text-lg-start">
           <h1 className="display-4 fw-bold lh-1 mb-3">Welcome!</h1>

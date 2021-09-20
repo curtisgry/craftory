@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
 
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { UserListProvider } from "../context/UserListsContext";
 
-export default function EditCompany({ toggleUpdate, data }) {
+export default function EditCompany({ data }) {
   const [name, setName] = useState(data.name);
   const [location, setLocation] = useState(data.location);
-  const [email, setEmail] = useState(data.email);
+
+
+  const { loadingList, setLoadingList } = useContext(UserListProvider.context)
 
   function handleName(e) {
     setName(e.target.value);
@@ -15,25 +18,22 @@ export default function EditCompany({ toggleUpdate, data }) {
   function handleLocation(e) {
     setLocation(e.target.value);
   }
-  function handleEmail(e) {
-    setEmail(e.target.value);
-  }
+
 
   async function handleSubmit(e) {
     e.preventDefault();
     const update = {
       name,
       location,
-      email,
     };
 
-    toggleUpdate();
+    setLoadingList(true)
     await axios.put(`/company/${data._id}`, update);
   }
 
   async function handleDelete() {
-    toggleUpdate();
 
+    setLoadingList(true)
     await axios.delete(`/company/${data._id}`);
   }
 
@@ -60,17 +60,6 @@ export default function EditCompany({ toggleUpdate, data }) {
             value={location || ""}
             onChange={handleLocation}
             placeholder="Enter location"
-          />
-        </FormGroup>
-        <FormGroup style={{ marginBottom: "1rem" }}>
-          <Label for="email">Email</Label>
-          <Input
-            type="email"
-            name="email"
-            id="email"
-            value={email || ""}
-            onChange={handleEmail}
-            placeholder="Enter email"
           />
         </FormGroup>
         <Button style={{ marginBottom: "1rem" }} disabled={name ? false : true}>

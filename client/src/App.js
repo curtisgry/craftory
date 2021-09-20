@@ -9,6 +9,7 @@ import LogIn from "./pages/LogIn";
 import NavBar from "./components/NavBar";
 import { useState } from "react";
 import { UserProvider } from "./context/UserContext";
+import { UserListProvider } from "./context/UserListsContext";
 import NotFound from "./pages/404";
 
 // This site has 3 pages, all of which are rendered
@@ -22,7 +23,6 @@ import NotFound from "./pages/404";
 
 function App() {
   const [update, setUpdate] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false)
 
   function toggleUpdate() {
     console.log("toggleupdate");
@@ -31,6 +31,7 @@ function App() {
 
   return (
     <UserProvider>
+      <UserListProvider>
       <div className="App">
         <Router>
           <div>
@@ -56,6 +57,7 @@ function App() {
           </div>
         </Router>
       </div>
+      </UserListProvider>
     </UserProvider>
   );
 }

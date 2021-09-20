@@ -3,7 +3,7 @@ import axios from "axios";
 const context = createContext(null);
 
 const useGetUser = () => {
-  const [loggedInUser, setLoggedInUser] = useState({});
+  const [loggedInUser, setLoggedInUser] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
@@ -15,20 +15,20 @@ const useGetUser = () => {
       .catch((e) => {
         setLoggedInUser(false);
       });
-  }, []);
+  }, [loading]);
 
-  return { loggedInUser, loading };
+  return { loggedInUser, loading, setLoading };
 };
 
 const UserProvider = ({ children }) => {
-  const { loggedInUser, loading } = useGetUser();
+  const { loggedInUser, loading, setLoading } = useGetUser();
 
   return (
-    <context.Provider value={{ user: loggedInUser, loading }}>
+    <context.Provider value={{ user: loggedInUser, loading, setLoading }}>
       {children}
     </context.Provider>
   );
 };
 
 UserProvider.context = context;
-export { UserProvider, useGetUser };
+export { UserProvider };

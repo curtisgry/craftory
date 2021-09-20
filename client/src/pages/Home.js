@@ -8,34 +8,30 @@ import { Container } from "reactstrap";
 import { UserProvider } from "../context/UserContext";
 import HomeLoggedIn from "./HomeLoggedIn";
 import HomeLoggedOut from "./HomeLoggedOut";
+import { UserListProvider } from "../context/UserListsContext";
 
 export default function Home({ update, toggleUpdate }) {
-  const [userCompanies, setUserCompanies] = useState(null);
 
-  const { user } = useContext(UserProvider.context);
+  const { user, loading, setLoading } = useContext(UserProvider.context);
+  
+  const {setLoadingList} = useContext(UserListProvider.context)
 
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    (async function fetchData() {
-      const res = await axios.get("/nav");
+    
+     
       setLoading(false)
-      const { companies } = res.data;
-      if (companies) {
-        setUserCompanies([...companies]);
-        setLoading(false)
-      }
-    })();
-  }, [update]);
+      setLoadingList(true)
+    
+  }, [loading, setLoading]);
 
-
+ 
   return (
     <>
     {loading ? <h3>Loading..</h3> : 
       <Container>
       {user ? (
         <HomeLoggedIn
-          companies={userCompanies}
           update={update}
           toggleUpdate={toggleUpdate}
         />
