@@ -26,6 +26,7 @@ app.use(
         helmet.contentSecurityPolicy({
                 directives: {
                         defaultSrc: [],
+                        connectSrc: ['https://calm-wave-18798.herokuapp.com/'],
                         scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
                         styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
                         workerSrc: ["'self'", 'blob:'],
