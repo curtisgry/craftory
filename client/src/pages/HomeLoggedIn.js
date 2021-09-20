@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 
 
@@ -15,13 +15,13 @@ import CompanyListItem from "../components/CompanyListItem";
 import { UserProvider } from "../context/UserContext";
 import { UserListProvider } from "../context/UserListsContext";
 
-export default function HomeLoggedIn({ companies, update, toggleUpdate }) {
+export default function HomeLoggedIn({  update, toggleUpdate }) {
 
   const { user } = useContext(UserProvider.context);
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  const {list, loadingList} = useContext(UserListProvider.context)
+  const {list} = useContext(UserListProvider.context)
 
   const toggle = () => setModalOpen(!modalOpen);
 

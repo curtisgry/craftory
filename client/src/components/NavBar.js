@@ -1,13 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
 import { UserProvider } from "../context/UserContext";
 import { UserListProvider } from "../context/UserListsContext";
 
 const NavBar = ({ update }) => {
   // const [isOpen, setIsOpen] = useState(false);
-  const [userCompanies, setUserCompanies] = useState(null);
   const { user } = useContext(UserProvider.context);
   const {list} = useContext(UserListProvider.context)
 

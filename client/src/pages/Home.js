@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-import axios from "axios";
 
 import { Container } from "reactstrap";
 
@@ -16,7 +15,7 @@ export default function Home({ update, toggleUpdate }) {
   
   const {setLoadingList} = useContext(UserListProvider.context)
 
-
+ 
   useEffect(() => {
     
      

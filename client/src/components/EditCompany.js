@@ -10,7 +10,7 @@ export default function EditCompany({ data }) {
   const [location, setLocation] = useState(data.location);
 
 
-  const { loadingList, setLoadingList } = useContext(UserListProvider.context)
+  const {  setLoadingList } = useContext(UserListProvider.context)
 
   function handleName(e) {
     setName(e.target.value);
