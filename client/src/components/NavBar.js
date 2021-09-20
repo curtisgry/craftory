@@ -30,7 +30,7 @@ const NavBar = ({ update }) => {
   }
 
   function logout() {
-    axios.get(`${baseUrl}/logout`;
+    axios.get(`${baseUrl}/logout`);
   }
 
   function renderCondLinks() {
