@@ -7,7 +7,7 @@ import { baseUrl } from "../utils/baseUrl";
 export default function AddCompany({ toggle, toggleUpdate }) {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
-  const { loadingList, setLoadingList } = useContext(UserListProvider.context);
+  const { setLoadingList } = useContext(UserListProvider.context);
 
   function handleName(e) {
     setName(e.target.value);

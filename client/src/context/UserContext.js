@@ -6,7 +6,7 @@ const context = createContext(null);
 const useGetUser = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [success, setSuccess] = useState();
+
   useEffect(() => {
     axios
       .get(`${baseUrl}/user`, { withCredentials: true })

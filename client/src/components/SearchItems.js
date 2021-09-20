@@ -12,7 +12,7 @@ export default function SearchInventory({ id, updateData, updateState }) {
 
   const handleChange = async (e) => {
     await setSearch(e.target.value);
-    if (search.length > 1) {
+    if (search.length > 2) {
       const data = {
         search: search.trim(),
       };
@@ -32,6 +32,7 @@ export default function SearchInventory({ id, updateData, updateState }) {
           id="search"
           value={search}
           onChange={handleChange}
+          onSelect={handleChange}
           placeholder="Search"
         />
       </FormGroup>

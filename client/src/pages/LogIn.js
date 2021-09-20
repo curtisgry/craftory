@@ -7,6 +7,7 @@ import { baseUrl } from "../utils/baseUrl";
 export default function LogIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const history = useHistory();
 
   const { setLoading } = useContext(UserProvider.context);
@@ -18,6 +19,10 @@ export default function LogIn() {
     setPassword(e.target.value);
   }
 
+  function closeAlert() {
+    setMessage("");
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -26,14 +31,38 @@ export default function LogIn() {
       password,
     };
 
-    const res = await axios.post(`${baseUrl}/login`, data);
-    console.log(res);
-    setLoading(true);
-    history.push("/");
+    try {
+      await axios.post(`${baseUrl}/login`, data);
+      setMessage("Welcome back!");
+      setLoading(true);
+      history.push("/");
+    } catch (e) {
+      if (e) {
+        setMessage("Invalid username or password.");
+      }
+    }
   }
 
   return (
     <div className="container col-xl-10 col-xxl-8 px-4 py-5">
+      {message.length ? (
+        <div
+          class="alert alert-warning alert-dismissible fade show"
+          role="alert"
+        >
+          {message}
+          <button
+            onClick={closeAlert}
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+      ) : (
+        ""
+      )}
+
       <div className="row align-items-center g-lg-5 py-5">
         <div className="col-lg-7 text-center text-lg-start">
           <h1 className="display-4 fw-bold lh-1 mb-3">Sign In</h1>
@@ -46,7 +75,15 @@ export default function LogIn() {
             <div className="form-floating mb-3">
               <input
                 type="text"
-                className="form-control"
+                className={`
+                form-control 
+                ${
+                  message === "Invalid username or password."
+                    ? "is-invalid"
+                    : ""
+                }
+                ${message === "Welcome back!" ? "is-valid" : ""}
+                `}
                 id="floatingInput"
                 placeholder="Username"
                 value={username}
@@ -57,7 +94,15 @@ export default function LogIn() {
             <div className="form-floating mb-3">
               <input
                 type="password"
-                className="form-control"
+                className={`
+                form-control 
+                ${
+                  message === "Invalid username or password."
+                    ? "is-invalid"
+                    : ""
+                }
+                ${message === "Welcome back!" ? "is-valid" : ""}
+                `}
                 id="floatingPassword"
                 placeholder="Password"
                 value={password}
