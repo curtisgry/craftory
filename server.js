@@ -100,7 +100,7 @@ const sessionConfig = {
         resave: false,
         saveUninitialized: true,
         cookie: {
-                domain: 'https://calm-wave-18798.herokuapp.com/'
+                domain: 'https://calm-wave-18798.herokuapp.com/',
                 httpOnly: true,
                 expires: Date.now() + 604800000,
                 maxAge: 604800000,
