@@ -27,6 +27,7 @@ app.use(
                 directives: {
                         defaultSrc: [],
                         connectSrc: ['https://calm-wave-18798.herokuapp.com/'],
+                        manifestSrc: ['https://calm-wave-18798.herokuapp.com/'],
                         scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
                         styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
                         workerSrc: ["'self'", 'blob:'],
