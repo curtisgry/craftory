@@ -28,7 +28,7 @@ const dbUrl = process.env.DB_URL;
 const devUrl = 'mongodb://localhost:27017/craftoryDev';
 const secret = process.env.SECRET || 'thisshouldbeabettersecret';
 
-mongoose.connect(devUrl)
+mongoose.connect(dbUrl)
         .then(() => {
                 console.log('MONGO CONNECTION OPEN');
         })
@@ -52,7 +52,7 @@ app.use(function (req, res, next) {
 });
 
 const store = new MongoStore({
-        mongoUrl: devUrl,
+        mongoUrl: dbUrl,
         secret,
         touchAfter: 24 * 60 * 60,
 });
