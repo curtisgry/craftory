@@ -6,19 +6,26 @@ if (process.env.NODE_ENV !== 'production') {
 
 const app = express();
 const port = process.env.PORT || 5000;
+
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const path = require('path');
 const Company = require('./models/Company');
 const Item = require('./models/Item');
 const User = require('./models/User');
 const ExpressError = require('./utils/ExpressError');
 const { ensureAuthenticated, isOwner } = require('./middleware');
 
-mongoose.connect('mongodb://localhost:27017/craftoryDev')
+const dbUrl = process.env.DB_URL;
+const devUrl = 'mongodb://localhost:27017/craftoryDev';
+const secret = process.env.SECRET || 'thisshouldbeabettersecret';
+
+mongoose.connect(dbUrl)
         .then(() => {
                 console.log('MONGO CONNECTION OPEN');
         })
@@ -32,15 +39,33 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(cors());
 
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get('/*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 app.use(function (req, res, next) {
         res.header('Access-Control-Allow-Origin', 'https://localhost:3000'); // update to match the domain you will make the request from
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         next();
 });
 
+const store = new MongoStore({
+        mongoUrl: dbUrl,
+        secret,
+        touchAfter: 24 * 60 * 60,
+});
+
+store.on('error', function (e) {
+        console.log('SESSION STORE ERROR', e);
+});
+
 // Express session
 const sessionConfig = {
-        secret: process.env.SECRET || 'secret',
+        store,
+        name: 'session',
+        secret,
         resave: false,
         saveUninitialized: true,
         cookie: {

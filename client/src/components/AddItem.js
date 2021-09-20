@@ -5,10 +5,6 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 export default function AddItem({
   id,
-  categories,
-  className,
-  handleClickModalBody,
-  handleClick,
   updateState,
 }) {
   const [name, setName] = useState("");
@@ -39,12 +35,15 @@ export default function AddItem({
       company: id,
     };
 
+    setName("");
+    setQty(0);
+    setQtyLow(0)
+    setLink("");
+
     updateState();
     await axios.post("/items", data);
 
-    setName("");
-    setQty(0);
-    setLink("");
+    
   }
 
   return (

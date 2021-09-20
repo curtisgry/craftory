@@ -1,13 +1,16 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { baseUrl } from "../utils/baseUrl";
 const context = createContext(null);
+
 
 const useGetUser = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+      if(!loggedInUser){
     axios
-      .get("/user", { withCredentials: true })
+      .get('/user', { withCredentials: true })
       .then((res) => {
         setLoggedInUser(res.data);
         setLoading(false);
@@ -15,6 +18,7 @@ const useGetUser = () => {
       .catch((e) => {
         setLoggedInUser(false);
       });
+    }
   }, [loading]);
 
   return { loggedInUser, loading, setLoading };
