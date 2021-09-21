@@ -20,7 +20,7 @@ const useGetUser = () => {
     axios
       .get(`${baseUrl}/user`, {withCredentials: true})
       .then((res) => {
-        console.log(res.data)
+    
         setLoggedInUser(res.data);
         setLoading(false);
       })
@@ -30,7 +30,7 @@ const useGetUser = () => {
   }
   }, [loading]);
 
-  console.log(loggedInUser)
+
   return { loggedInUser, loading, setLoading };
 };
 

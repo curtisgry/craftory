@@ -33,7 +33,6 @@ export default function AddCompany({ toggle, toggleUpdate }) {
 
     axios
       .post(`${baseUrl}/company`, data , {withCredentials: true})
-      .then((res) => {console.log(res)})
       .catch((e) => console.log(e));
   }
 
