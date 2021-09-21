@@ -1,16 +1,15 @@
-const mongoose = require("mongoose");
-const Company = require("./models/Company");
-const Item = require("./models/Item");
+const mongoose = require('mongoose');
+const Company = require('./models/Company');
+const Item = require('./models/Item');
 
-mongoose
-  .connect("mongodb://localhost:27017/craftoryDev")
-  .then(() => {
-    console.log("MONGO CONNECTION OPEN");
-  })
-  .catch((e) => {
-    console.log("MONGO CONNECTION ERROR");
-    console.log(e);
-  });
+mongoose.connect('mongodb://localhost:27017/craftoryDev')
+        .then(() => {
+                console.log('MONGO CONNECTION OPEN');
+        })
+        .catch((e) => {
+                console.log('MONGO CONNECTION ERROR');
+                console.log(e);
+        });
 
 // const p = new Product({
 //         name: 'Ruby Grapefruit',
@@ -55,15 +54,15 @@ mongoose
 // seedDb();
 
 const testDb = async () => {
-  const company = await Company.findById("6140db4ec83578aa14ba6d98");
-  const items = await Item.find({}).populate({
-    path: "company",
-    match: { _id: { $eq: "6140db4ec83578aa14ba6d98" } },
-  });
+        const company = await Company.findById('6140db4ec83578aa14ba6d98');
+        const items = await Item.find({}).populate({
+                path: 'company',
+                match: { _id: { $eq: '6140db4ec83578aa14ba6d98' } },
+        });
 
-  console.log(items);
-  // items.forEach((item) => company.items.push(item));
-  // await company.save();
+        console.log(items);
+        // items.forEach((item) => company.items.push(item));
+        // await company.save();
 };
 
 testDb();

@@ -8,6 +8,7 @@ export default function AddCompany({ toggle, toggleUpdate }) {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const { setLoadingList } = useContext(UserListProvider.context);
+ 
 
   function handleName(e) {
     setName(e.target.value);
@@ -31,8 +32,8 @@ export default function AddCompany({ toggle, toggleUpdate }) {
     setLoadingList(true);
 
     axios
-      .post(`${baseUrl}/company`, data)
-      .then((res) => {})
+      .post(`${baseUrl}/company`, data , {withCredentials: true})
+      .then((res) => {console.log(res)})
       .catch((e) => console.log(e));
   }
 

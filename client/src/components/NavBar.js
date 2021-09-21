@@ -32,7 +32,7 @@ const NavBar = ({ update }) => {
   }
 
   function logout() {
-    axios.get(`${baseUrl}/logout`).then((res) => {
+    axios.get(`${baseUrl}/logout`, {withCredentials: true}).then((res) => {
       setLoading(true);
       history.push("/");
     });

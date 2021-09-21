@@ -32,7 +32,7 @@ export default function LogIn() {
     };
 
     try {
-      await axios.post(`${baseUrl}/login`, data);
+      await axios.post(`${baseUrl}/login`, data, {withCredentials: true});
       setMessage("Welcome back!");
       setLoading(true);
       history.push("/");

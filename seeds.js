@@ -1,126 +1,125 @@
-const mongoose = require("mongoose");
-const Company = require("./models/Company");
-const Item = require("./models/Item");
+const mongoose = require('mongoose');
+const Company = require('./models/Company');
+const Item = require('./models/Item');
 
-mongoose
-  .connect("mongodb://localhost:27017/craftoryDev")
-  .then(() => {
-    console.log("MONGO CONNECTION OPEN");
-  })
-  .catch((e) => {
-    console.log("MONGO CONNECTION ERROR");
-    console.log(e);
-  });
+mongoose.connect('mongodb://localhost:27017/craftoryDev')
+        .then(() => {
+                console.log('MONGO CONNECTION OPEN');
+        })
+        .catch((e) => {
+                console.log('MONGO CONNECTION ERROR');
+                console.log(e);
+        });
 
 const clearDB = async () => {
-  await Company.deleteMany({});
-  await Item.deleteMany({});
+        await Company.deleteMany({});
+        await Item.deleteMany({});
 };
 
 clearDB();
 
 const seedItemsCompany1 = [
-  {
-    name: "Wooden Wicks",
-    link: "https://www.candlescience.com/containers/small_straight_sided_jar",
-    qty: 50,
-    qtyLow: 30,
-    category: "wicks",
-  },
-  {
-    name: "Cotton Wicks Small",
-    link: "https://www.candlescience.com/containers/small_straight_sided_jar",
-    qty: 100,
-    qtyLow: 50,
-    category: "wicks",
-  },
-  {
-    name: "Small Jars",
-    link: "https://www.candlescience.com/containers/small_straight_sided_jar",
-    qty: 30,
-    qtyLow: 40,
-    category: "containers",
-  },
-  {
-    name: "Wax",
-    link: "https://www.candlescience.com/containers/small_straight_sided_jar",
-    qty: 23,
-    qtyLow: 20,
-    category: "wax",
-  },
-  {
-    name: "Wick Stickers",
-    link: "https://www.candlescience.com/containers/small_straight_sided_jar",
-    qty: 50,
-    qtyLow: 20,
-    category: "wicks",
-  },
-  {
-    name: "2X4 White Labels",
-    link: "https://www.candlescience.com/containers/small_straight_sided_jar",
-    qty: 100,
-    qtyLow: 20,
-    category: "labels",
-  },
-  {
-    name: "Black Lids",
-    link: "https://www.candlescience.com/containers/small_straight_sided_jar",
-    qty: 30,
-    qtyLow: 20,
-    category: "containers",
-  },
-  {
-    name: "Silver Lids",
-    link: "https://www.candlescience.com/containers/small_straight_sided_jar",
-    qty: 23,
-    qtyLow: 20,
-    category: "wax",
-  },
-  {
-    name: "Apples and Maple Burbon",
-    link: "https://www.candlescience.com/containers/small_straight_sided_jar",
-    qty: 23,
-    qtyLow: 20,
-    category: "scents",
-  },
-  {
-    name: "Lavender",
-    link: "https://www.candlescience.com/containers/small_straight_sided_jar",
-    qty: 23,
-    qtyLow: 20,
-    category: "scents",
-  },
-  {
-    name: "Fresh Coffy",
-    link: "https://www.candlescience.com/containers/small_straight_sided_jar",
-    qty: 23,
-    qtyLow: 20,
-    category: "wax",
-  },
+        {
+                name: 'Wooden Wicks',
+                link: 'https://www.candlescience.com/containers/small_straight_sided_jar',
+                qty: 50,
+                qtyLow: 30,
+                category: 'wicks',
+        },
+        {
+                name: 'Cotton Wicks Small',
+                link: 'https://www.candlescience.com/containers/small_straight_sided_jar',
+                qty: 100,
+                qtyLow: 50,
+                category: 'wicks',
+        },
+        {
+                name: 'Small Jars',
+                link: 'https://www.candlescience.com/containers/small_straight_sided_jar',
+                qty: 30,
+                qtyLow: 40,
+                category: 'containers',
+        },
+        {
+                name: 'Wax',
+                link: 'https://www.candlescience.com/containers/small_straight_sided_jar',
+                qty: 23,
+                qtyLow: 20,
+                category: 'wax',
+        },
+        {
+                name: 'Wick Stickers',
+                link: 'https://www.candlescience.com/containers/small_straight_sided_jar',
+                qty: 50,
+                qtyLow: 20,
+                category: 'wicks',
+        },
+        {
+                name: '2X4 White Labels',
+                link: 'https://www.candlescience.com/containers/small_straight_sided_jar',
+                qty: 100,
+                qtyLow: 20,
+                category: 'labels',
+        },
+        {
+                name: 'Black Lids',
+                link: 'https://www.candlescience.com/containers/small_straight_sided_jar',
+                qty: 30,
+                qtyLow: 20,
+                category: 'containers',
+        },
+        {
+                name: 'Silver Lids',
+                link: 'https://www.candlescience.com/containers/small_straight_sided_jar',
+                qty: 23,
+                qtyLow: 20,
+                category: 'wax',
+        },
+        {
+                name: 'Apples and Maple Burbon',
+                link: 'https://www.candlescience.com/containers/small_straight_sided_jar',
+                qty: 23,
+                qtyLow: 20,
+                category: 'scents',
+        },
+        {
+                name: 'Lavender',
+                link: 'https://www.candlescience.com/containers/small_straight_sided_jar',
+                qty: 23,
+                qtyLow: 20,
+                category: 'scents',
+        },
+        {
+                name: 'Fresh Coffy',
+                link: 'https://www.candlescience.com/containers/small_straight_sided_jar',
+                qty: 23,
+                qtyLow: 20,
+                category: 'wax',
+        },
 ];
 
 const seedItemsCompany2 = [
-  {
-    name: "Chocolate",
-    link: "https://www.candlescience.com/containers/small_straight_sided_jar",
-    qty: 443,
-    qtyLow: 90,
-    category: "ingredients",
-  },
-  {
-    name: "Sugar",
-    link: "https://www.candlescience.com/containers/small_straight_sided_jar",
-    qty: 23,
-    qtyLow: 20,
-    category: "ingredients",
-  },
-  {
-    name: "Sheet Pan",
-    link: "https://www.candlescience.com/containers/small_straight_sided_jar",
-    qty: 5,
-    qtyLow: 2,
-    category: "tools",
-  },
+        {
+                name: 'Chocolate',
+                link: 'https://www.candlescience.com/containers/small_straight_sided_jar',
+                qty: 443,
+                qtyLow: 90,
+                category: 'ingredients',
+        },
+        {
+                name: 'Sugar',
+                link: 'https://www.candlescience.com/containers/small_straight_sided_jar',
+                qty: 23,
+                qtyLow: 20,
+                category: 'ingredients',
+        },
+        {
+                name: 'Sheet Pan',
+                link: 'https://www.candlescience.com/containers/small_straight_sided_jar',
+                qty: 5,
+                qtyLow: 2,
+                category: 'tools',
+        },
 ];
 
 // const seedCompany1 = async () => {

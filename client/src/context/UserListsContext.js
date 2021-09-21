@@ -8,7 +8,7 @@ const useGetLists = () => {
   const [loadingList, setLoadingList] = useState(true);
   useEffect(() => {
     if (loadingList) {
-      axios.get(`${baseUrl}/userdata`).then((res) => {
+      axios.get(`${baseUrl}/userdata`, {withCredentials: true}).then((res) => {
         const { companies } = res.data;
         if (companies) {
           setList([...companies]);

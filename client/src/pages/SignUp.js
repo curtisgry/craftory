@@ -4,6 +4,8 @@ import axios from "axios";
 import { UserProvider } from "../context/UserContext";
 import { baseUrl } from "../utils/baseUrl";
 
+
+
 export default function About() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -26,7 +28,7 @@ export default function About() {
     setMessage("");
   }
 
-  async function handleSubmit(e) {
+   function handleSubmit(e) {
     e.preventDefault();
     if (!email || username.length < 3 || password.length < 8) {
       return setMessage(
@@ -40,16 +42,23 @@ export default function About() {
       password,
     };
 
-    try {
-      await axios.post(`${baseUrl}/register`, data);
-      setMessage("Welcome!");
-      setLoading(true);
-      history.push("/");
-    } catch (e) {
-      if (e.response.status === 500) {
-        setMessage("Email already registered.");
-      }
-    }
+      axios.post(`${baseUrl}/register`, data, {withCredentials: true})
+      .then(res =>  {
+          setMessage("Welcome!");
+          setLoading(true);
+          history.push("/");
+        
+      })
+      .catch(({response}) => {
+        const msg = response.data.message
+        if(msg){
+          setMessage(msg)
+        }
+       
+      });
+      
+      
+  
   }
 
   return (
