@@ -85,7 +85,7 @@ export default function Dashboard() {
   useEffect(() => {
     async function fetchApi() {
       const res = await axios.get(`${baseUrl}/company/${id}`, { withCredentials:true, params: id });
-      const itemData = res.data.filtered;
+      const itemData = res.data.items;
       const companyData = res.data.company;
 
       setData(itemData);

@@ -27,7 +27,7 @@ const companySchema = new Schema({
 companySchema.post('findOneAndDelete', async function (company) {
         if (company.items.length) {
                 const res = await Item.deleteMany({ _id: { $in: company.items } });
-                console.log(res);
+              
         }
 });
 

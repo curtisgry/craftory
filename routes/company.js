@@ -22,10 +22,11 @@ router.get(
         catchAsync(async (req, res) => {
                 const { id } = req.params;
 
-                const company = await Company.findById(id);
-                const items = await Item.find().populate('company');
-                const filtered = items.filter((item) => item.company.name === company.name);
-                res.send({ filtered, company });
+                const company = await Company.findById(id).populate('items');
+
+                const { items } = company;
+
+                res.send({ items, company });
         })
 );
 

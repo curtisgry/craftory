@@ -32,6 +32,7 @@ router.post(
 );
 
 router.post('/login', passport.authenticate('local'), (req, res, next) => {
+  
         res.redirect('/');
 });
 

@@ -25,6 +25,7 @@ const { ensureAuthenticated, isOwner } = require('./middleware');
 const dbUrl = process.env.DB_URL;
 // const dbUrl = 'mongodb://localhost:27017/craftoryDev';
 const appUrl = 'https://calm-wave-18798.herokuapp.com/'
+// const appUrl = 'http://localhost:3000';
 const secret = process.env.SECRET || 'developmentmodesecret';
 
 const app = express();
@@ -87,8 +88,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-// not sure if will end up using flash but its here
-
 // static files for production
 app.use(express.static(path.join(__dirname, 'client/build')));
 
@@ -117,13 +116,13 @@ const sessionConfig = {
         store,
         name: 'session',
         secret,
-        resave: false,
+        resave: true,
         saveUninitialized: true,
         cookie: {
-                // domain: 'https://calm-wave-18798.herokuapp.com/',
+                // domain: 'http://localhost:3000/',
                 httpOnly: true,
                 expires: Date.now() + 604800000,
-                maxAge: 604800000,
+                maxAge: 8 * 60 * 60 * 1000,
         },
 };
 
@@ -156,6 +155,7 @@ app.use('/items', itemRoutes);
 
 // check for logged in user and return that users data
 app.get('/userdata', ensureAuthenticated, async (req, res) => {
+    
         if (req.user) {
                 const id = req.user._id;
                 const companies = await Company.find({ user: id });

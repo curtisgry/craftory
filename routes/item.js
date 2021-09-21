@@ -9,8 +9,10 @@ const router = express.Router();
 router.post(
         '/',
         catchAsync(async (req, res, next) => {
+         
                 const item = new Item(req.body);
                 const company = await Company.findById(req.body.company);
+           
                 company.items.push(item);
                 await item.save();
                 await company.save();
