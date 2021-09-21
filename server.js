@@ -22,14 +22,15 @@ const User = require('./models/User');
 
 const { ensureAuthenticated, isOwner } = require('./middleware');
 
-// const dbUrl = process.env.DB_URL;
-const dbUrl = 'mongodb://localhost:27017/craftoryDev';
+const dbUrl = process.env.DB_URL;
+// const dbUrl = 'mongodb://localhost:27017/craftoryDev';
+const appUrl = 'https://calm-wave-18798.herokuapp.com/'
 const secret = process.env.SECRET || 'developmentmodesecret';
 
 const app = express();
 // using cors to try to resolve some axios errors
 const corsOptions = {
-        origin: 'http://localhost:3000',
+        origin: appUrl,
         optionsSuccessStatus: 200,
         credentials: true,
 };
@@ -60,8 +61,8 @@ app.use(
         helmet.contentSecurityPolicy({
                 directives: {
                         defaultSrc: [],
-                        connectSrc: ['https://calm-wave-18798.herokuapp.com/'],
-                        manifestSrc: ['https://calm-wave-18798.herokuapp.com/'],
+                        connectSrc: [appUrl],
+                        manifestSrc: [appUrl],
                         scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
                         styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
                         workerSrc: ["'self'", 'blob:'],
