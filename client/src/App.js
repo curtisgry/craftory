@@ -35,7 +35,7 @@ function App() {
           <Router>
             <div>
               <NavBar update={update} toggleUpdate={toggleUpdate} />
-
+                
               <Switch>
                 <Route exact path="/">
                   <Home update={update} toggleUpdate={toggleUpdate} />
@@ -52,8 +52,10 @@ function App() {
                 <Route>
                   <NotFound />
                 </Route>
+           
               </Switch>
-            </div>
+              </div>
+            
           </Router>
         </div>
       </UserListProvider>

@@ -64,13 +64,13 @@ export default function LogIn() {
       )}
 
       <div className="row align-items-center g-lg-5 py-5">
-        <div className="col-lg-7 text-center text-lg-start">
+        <div className="col-12 text-center">
           <h1 className="display-4 fw-bold lh-1 mb-3">Sign In</h1>
         </div>
-        <div className="col-md-10 mx-auto col-lg-5">
+        <div className="col mx-auto col-lg-5">
           <form
             onSubmit={handleSubmit}
-            className="p-4 p-md-5 border rounded-3 bg-light"
+            className="p-4 p-md-5 border rounded-3 bg-light shadow"
           >
             <div className="form-floating mb-3">
               <input

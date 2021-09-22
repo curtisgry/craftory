@@ -80,18 +80,19 @@ export default function About() {
       ) : (
         ""
       )}
-      <div className="row align-items-center g-lg-5 py-5">
-        <div className="col-lg-7 text-center text-lg-start">
+      <div className="row g-lg-5 py-5">
+        <div className="col text-center">
           <h1 className="display-4 fw-bold lh-1 mb-3">Welcome!</h1>
-          <p className="col-lg-10 fs-4">
+          <p className="mx-auto col-lg-8 fs-4">
             Craftory is an easy way to keep track of your inventory for making
             things. Great for a hobby or a small businness.
           </p>
         </div>
-        <div className="col-md-10 mx-auto col-lg-5">
+        <div className="row py-5">
+        <div className="mx-auto col-lg-6">
           <form
             onSubmit={handleSubmit}
-            className="p-4 p-md-5 border rounded-3 bg-light validated-form"
+            className="p-4 p-md-5 border rounded-3 bg-light validated-form shadow"
             noValidate
           >
             <div className="form-floating mb-3">
@@ -144,6 +145,7 @@ export default function About() {
             </button>
             <hr className="my-4" />
           </form>
+        </div>
         </div>
       </div>
     </div>

@@ -106,11 +106,6 @@ export default function Dashboard() {
       {loading ? <h3>Loading..</h3> : ""}
       {data && !loading ? (
         <Container style={{ marginTop: "8rem" }}>
-          <SearchInventory
-            id={id}
-            updateState={updateState}
-            updateData={updateData}
-          />
           <h1>{`${company ? company.name : ""}`}'s Inventory</h1>
           <Button
             style={{ marginBottom: "2rem" }}
@@ -119,6 +114,12 @@ export default function Dashboard() {
           >
             Add Item
           </Button>
+          <SearchInventory
+            id={id}
+            updateState={updateState}
+            updateData={updateData}
+          />
+          
           <Modal isOpen={modalOpen} toggle={toggle}>
             <ModalHeader toggle={toggle}>Add New Item</ModalHeader>
             <ModalBody>

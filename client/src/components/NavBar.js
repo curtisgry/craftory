@@ -83,8 +83,8 @@ const NavBar = ({ update }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <Link className="nav-link text-muted" to="/">
-          <h3>Craftory</h3>
+        <Link className="navbar-brand text-muted" to="/">
+          Craftory
         </Link>
         <button
           className="navbar-toggler"

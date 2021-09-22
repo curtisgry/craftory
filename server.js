@@ -22,10 +22,10 @@ const User = require('./models/User');
 
 const { ensureAuthenticated, isOwner } = require('./middleware');
 
-const dbUrl = process.env.DB_URL;
-// const dbUrl = 'mongodb://localhost:27017/craftoryDev';
-const appUrl = 'https://calm-wave-18798.herokuapp.com/'
-// const appUrl = 'http://localhost:3000';
+// const dbUrl = process.env.DB_URL;
+const dbUrl = 'mongodb://localhost:27017/craftoryDev';
+// const appUrl = 'https://calm-wave-18798.herokuapp.com/'
+const appUrl = 'http://localhost:3000';
 const secret = process.env.SECRET || 'developmentmodesecret';
 
 const app = express();
