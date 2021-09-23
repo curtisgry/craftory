@@ -91,13 +91,6 @@ app.use(methodOverride('_method'));
 // static files for production
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-// potential solution for axios proxy errors, need to change the domain to the heroku URL
-// app.use(function (req, res, next) {
-//         res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000/'); // update to match the domain you will make the request from
-//         res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Authorization');
-//         next();
-// });
-
 // create mongo store for session store
 const store = new MongoStore({
         mongoUrl: dbUrl,
@@ -155,7 +148,6 @@ app.use('/items', itemRoutes);
 
 // check for logged in user and return that users data
 app.get('/userdata', ensureAuthenticated, async (req, res) => {
-    
         if (req.user) {
                 const id = req.user._id;
                 const companies = await Company.find({ user: id });

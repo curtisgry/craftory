@@ -22,7 +22,7 @@ export default function AddItem({ id, updateState }) {
     setLink(e.target.value);
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     const data = {
       name,
@@ -32,13 +32,17 @@ export default function AddItem({ id, updateState }) {
       company: id,
     };
 
-    setName("");
-    setQty(0);
-    setQtyLow(0);
-    setLink("");
+      setName("");
+      setQty(0);
+      setQtyLow(0);
+      setLink("");
+   
+    axios.post(`${baseUrl}/items`, data, {withCredentials: true})
+    
 
     updateState();
-    await axios.post(`${baseUrl}/items`, data);
+    
+    
   }
 
   return (
