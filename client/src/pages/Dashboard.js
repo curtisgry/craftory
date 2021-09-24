@@ -57,7 +57,7 @@ export default function Dashboard() {
   function renderItemsLowStock(arr) {
     if (arr) {
       return arr
-        .filter((item) => item.qtyLow > item.qty)
+        .filter((item) => item.qtyLow >= item.qty)
         .map((item) => {
           return (
             <DashboardItem

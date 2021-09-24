@@ -24,7 +24,7 @@ const { ensureAuthenticated, isOwner } = require('./middleware');
 
 const dbUrl = process.env.DB_URL;
 // const dbUrl = 'mongodb://localhost:27017/craftoryDev';
-const appUrl = 'https://calm-wave-18798.herokuapp.com/'
+const appUrl = 'https://calm-wave-18798.herokuapp.com/';
 // const appUrl = 'http://localhost:3000';
 const secret = process.env.SECRET || 'developmentmodesecret';
 
@@ -155,11 +155,6 @@ app.get('/userdata', ensureAuthenticated, async (req, res) => {
         }
         res.send([]);
 });
-
-// did not end up using
-// app.get('/auth', (req, res) => {
-//         res.send(req.session);
-// });
 
 // search in company inventory
 app.post('/search/:id', async (req, res, next) => {

@@ -26,12 +26,12 @@ export default function EditCompany({ data }) {
     };
 
     setLoadingList(true);
-    await axios.put(`${baseUrl}/company/${data._id}`, update);
+    await axios.put(`${baseUrl}/company/${data._id}`, update, {withCredentials: true});
   }
 
   async function handleDelete() {
     setLoadingList(true);
-    await axios.delete(`${baseUrl}/company/${data._id}`);
+    await axios.delete(`${baseUrl}/company/${data._id}`, {withCredentials: true});
   }
 
   return (
